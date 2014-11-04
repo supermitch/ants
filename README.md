@@ -9,11 +9,11 @@ Clone the repo
 
 ##Running
 
-    python ants.py
+    python main.py
 
 ##Requires
 
-* Python 2.7
+* Python 2.7 (sorry, using OSX default...)
 * Pygame
 
 ##Description
