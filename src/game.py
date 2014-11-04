@@ -3,6 +3,7 @@ import sys
 import pygame
 from pygame.locals import *
 
+from src.collider import Collider
 from src.renderer import Renderer
 from src.world import World
 
@@ -13,8 +14,10 @@ class Game():
         self.FPS = 60
         self.fps_clock = pygame.time.Clock()
 
-        self.world = World(self.screen_size)
-        self.world.generate()
+        self.world = World(self.screen_size)  # Generate the world
+        self.world.generate()  # Populate world
+
+        self.collider = Collider(self.world.objects)
 
         self.win_surf = pygame.display.set_mode(self.screen_size, RESIZABLE,
                                                 32)
@@ -47,6 +50,7 @@ class Game():
                         print('space')
             
             self.world.update(dt)
+            self.collider.detect()
             self.renderer.render()
 
     def terminate(self):

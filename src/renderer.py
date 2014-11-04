@@ -1,3 +1,9 @@
+"""
+Renderer is in charge of all drawing graphics to the screen.
+
+The game did define the screen size, but otherwise it's all here.
+
+"""
 import math
 
 import pygame
@@ -8,13 +14,11 @@ class Renderer():
         self.world = world
 
     def render(self):
-        print('rendering world')
         self.surface.fill(self.world.bg_color)
         self.__render_ants()
         pygame.display.update()
 
     def __render_ants(self):
-        print('\trendering ants')
         for ant in self.world.ants:
             color = {
                 'black': (0, 0, 0, 128),

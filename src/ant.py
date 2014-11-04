@@ -35,18 +35,22 @@ class Ant():
     def turn(self, dt=None):
         """ Turn. """
         # TODO: Implement dt
-        two_pi = 2 * math.pi
         # We can't turn all the way around in on step
         self.orientation += rnd.uniform(-0.2, 0.2)  # about 10 degrees.
-        if self.orientation >= two_pi:
-            self.orientation -= two_pi
-        if self.orientation < 0:
-            self.orientation += two_pi
+        if self.orientation >= 2 * math.pi:
+            self.orientation -= 2 * math.pi
+        elif self.orientation < 0:
+            self.orientation += 2 * math.pi
 
     def move(self, dt=None):
         """ Move. """
         distance = dt/1000.0 * self.speed if dt else 3
-        dx = distance * math.cos(self.orientation)
-        dy = distance * math.sin(self.orientation)
+        dx = int(distance * math.cos(self.orientation))
+        dy = int(distance * math.sin(self.orientation))
         self.pos = (self.pos[0] + dx, self.pos[1] - dy)
+        self.rect.move_ip(dx, -dy)
+
+    def collide(self, obj):
+        """ We ran into something. Turn around. """
+        self.orientation += math.pi
 
