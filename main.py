@@ -1,4 +1,4 @@
-from classes.game import Game
+from src.game import Game
 
 def main():
     print('Welcome to Ants!')

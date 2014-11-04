@@ -1,6 +1,6 @@
 import random as rnd
 
-from classes.ant import Ant
+from src.ant import Ant
 
 class World():
     """ A world contains all the objects. """

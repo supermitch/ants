@@ -3,8 +3,8 @@ import sys
 import pygame
 from pygame.locals import *
 
-from classes.renderer import Renderer
-from classes.world import World
+from src.renderer import Renderer
+from src.world import World
 
 
 class Game():
