@@ -13,14 +13,20 @@ class Ant():
 
         self.pos = pos  # center of the ant
 
-        self.speed = {'black': 40, 'red': 80}[breed]
+        self.speed = {'black': 80.0, 'red': 80.0}[breed]
         self.width = {'black': 10, 'red': 5}[breed]
         self.height = {'black': 4, 'red': 2}[breed]
+        self.mass = {'black': 5, 'red': 2}[breed]
+        self.color = {
+            'black': (0, 0, 0, 128),
+            'red': (255, 0, 0, 128),
+        }[breed]
 
         if caste == 'queen':
             self.width *= 2.5
             self.height *= 2.5
-            self.speed /= 2
+            self.speed /= 2.0
+            self.mass *= 5
  
         self.rect = Rect(self.pos[0] - self.width/2,
                          self.pos[1] + self.height/2,
@@ -44,13 +50,16 @@ class Ant():
 
     def move(self, dt=None):
         """ Move. """
-        distance = dt/1000.0 * self.speed if dt else 3
-        dx = int(distance * math.cos(self.orientation))
-        dy = int(distance * math.sin(self.orientation))
+        distance = dt/1000.0 * float(self.speed) if dt else 3.0
+        dx = distance * math.cos(self.orientation)
+        dy = distance * math.sin(self.orientation)
         self.pos = (self.pos[0] + dx, self.pos[1] - dy)
-        self.rect.move_ip(dx, -dy)
+        self.rect.center = self.pos
 
     def collide(self, obj):
         """ We ran into something. Turn around. """
-        self.orientation += math.pi
+        if self.mass > obj.mass:
+            pass
+        else:
+            self.orientation += math.pi  # Turn around
 

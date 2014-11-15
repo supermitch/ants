@@ -3,6 +3,7 @@ import random as rnd
 from pygame import Rect
 
 from src.ant import Ant
+from src.wall import Wall
 
 class World():
     """ A world contains all the objects. """
@@ -18,21 +19,19 @@ class World():
         print('generating world')
         #TODO: Load the map here...
         self.generate_walls(self.screen_size)
-        self.generate_ants(200)
-        self.generate_queens(2)
+        self.generate_ants(500)
+        self.generate_queens(10)
         return None
 
     def generate_walls(self, size):
         """ Generate the wall objects, for collision detection. """
-        print(size)
-        t = 20  # Wall thickness, all off screen!
+        t = 5  # Wall thickness, off screen!
         self.walls = [
-            Rect((-t, -t), (t, size[1] + 2 * t)),  # left wall
-            Rect((-t, -t), (size[0] + 2 * t, t)),  # top
-            Rect((size[0], -t), (t, size[1] + 2 * t)),  # right
-            Rect((-20, size[1]), (size[0] + 2 * t, t)),  # bot
+            Wall(Rect((-t, -t), (size[0] + 2 * t, t))),  # top
+            Wall(Rect((size[0], -t), (t, size[1] + 2 * t))),  # right
+            Wall(Rect((-20, size[1]), (size[0] + 2 * t, t))),  # bot
+            Wall(Rect((-t, -t), (t, size[1] + 2 * t))),  # left
         ]
-        print(self.walls)
         return None
 
     def generate_ants(self, ant_count):
@@ -63,5 +62,5 @@ class World():
     @property
     def objects(self):
         """ Report all our objects. """
-        return self.ants + self.walls
+        return self.ants
 

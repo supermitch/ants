@@ -17,13 +17,14 @@ class Game():
         self.world = World(self.screen_size)  # Generate the world
         self.world.generate()  # Populate world
 
-        self.collider = Collider(self.world.objects)
+        self.collider = Collider(self.world.objects, self.world.walls,
+                                 self.screen_size)
 
-        self.win_surf = pygame.display.set_mode(self.screen_size, RESIZABLE,
-                                                32)
+        self.win_surf = pygame.display.set_mode(self.screen_size,
+                                                RESIZABLE, 32)
         pygame.display.set_caption('Ants! 1.0')
 
-        self.renderer = Renderer(self.win_surf, self.world)
+        self.renderer = Renderer(self.win_surf, self.world, self.fps_clock)
     
     def run(self):
 
@@ -50,7 +51,7 @@ class Game():
                         print('space')
             
             self.world.update(dt)
-            self.collider.detect()
+            self.collider.update()
             self.renderer.render()
 
     def terminate(self):
