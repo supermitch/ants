@@ -1,22 +1,27 @@
-#Ants!
+Ants!
+=====
 
 Ants! is a video game / simulation. Wanted to practice some
 AI / machine learning stuff, and ants are interesting.
 
-##Installing
+Installing
+----------
 
 Clone the repo
 
-##Running
+Running
+-------
 
     python main.py
 
-##Requires
+Requires
+--------
 
 * Python 2.7 (sorry, using OSX default...)
 * Pygame
 
-##Description
+Description
+-----------
 
 Watch the ants do their thing.
 
