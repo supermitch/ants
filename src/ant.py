@@ -29,7 +29,7 @@ class Ant():
             self.mass *= 5
  
         self.rect = Rect(self.pos[0] - self.width/2,
-                         self.pos[1] + self.height/2,
+                         self.pos[1] - self.height/2,
                          self.width, self.height)
 
         self.orientation = rnd.uniform(0, 2 * math.pi)  # radians

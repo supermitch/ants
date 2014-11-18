@@ -17,6 +17,7 @@ class Renderer():
     def render(self):
         self.surface.fill(self.world.bg_color)
         self.__render_ants()
+        self.__render_items()
         self.__render_fps()
         pygame.display.update()
 
@@ -45,4 +46,17 @@ class Renderer():
             #outline = pygame.Rect(top_left[0], top_left[1], w, h)
             #pygame.draw.rect(self.surface, (0, 255, 0, 255), outline, 1) 
             #pygame.draw.circle(self.surface, (255, 0, 0, 255), ant.rect.center, 20, 1)
+
+    def __render_items(self):
+        for obj in self.world.items:
+            obj_surf = pygame.Surface((obj.width, obj.height),
+                                         pygame.SRCALPHA, 32)
+            obj_surf.fill(obj.color)
+            top_left = (obj.pos[0] - obj.width/2, obj.pos[1] - obj.height/2)
+            self.surface.blit(obj_surf, top_left)
+    
+            # Draw outline and center
+            #outline = pygame.Rect(top_left[0], top_left[1], obj.width, obj.height)
+            #pygame.draw.rect(self.surface, (0, 255, 0, 255), outline, 1) 
+            #pygame.draw.circle(self.surface, (255, 0, 0, 255), obj.rect.center, 20, 1)
 

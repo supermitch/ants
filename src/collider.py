@@ -105,8 +105,6 @@ class Collider():
         # Detect ant-to-ant collisions
         for one, two in it.combinations(group, 2):
             if one.rect.colliderect(two.rect):
-                one.color = (0,0,255)
-                two.color = (0,0,255)
                 try:
                     one.collide(two)
                 except AttributeError: # Walls cannot respond

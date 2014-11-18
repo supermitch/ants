@@ -2,6 +2,7 @@ import random as rnd
 
 from pygame import Rect
 
+import items
 import maps
 from ant import Ant
 from wall import Wall
@@ -15,13 +16,15 @@ class World():
         self.screen_size = screen_size
         self.bg_color = (100, 100, 100)
         self.ants = []
+        self.items = []
         self.walls = []
 
     def generate(self):
         print('generating world')
         #TODO: Load the map here...
-        self.map = maps.load_level_file(1)
+        map_data = maps.load_level_file(1)
         self.generate_walls(self.screen_size)
+        self.generate_map_objects(map_data)
         self.generate_ants(500)
         self.generate_queens(10)
         return None
@@ -36,6 +39,15 @@ class World():
             Wall(Rect((-t, -t), (t, size[1] + 2 * t))),  # left
         ]
         return None
+
+    def generate_map_objects(self, map_data):
+        """ Add map object to the world. """
+        print(map_data)
+        item_data = map_data['items']
+        for class_name, coords in item_data.items():
+            # Instantiate different classes depending on item name
+            obj = getattr(items, class_name.title())(coords) 
+            self.items.append(obj)
 
     def generate_ants(self, ant_count):
         """ Generate normal ants. """
@@ -65,5 +77,5 @@ class World():
     @property
     def objects(self):
         """ Report all our objects. """
-        return self.ants
+        return self.ants + self.items
 
