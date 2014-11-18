@@ -2,8 +2,10 @@ import random as rnd
 
 from pygame import Rect
 
-from src.ant import Ant
-from src.wall import Wall
+import maps
+from ant import Ant
+from wall import Wall
+
 
 class World():
     """ A world contains all the objects. """
@@ -18,6 +20,7 @@ class World():
     def generate(self):
         print('generating world')
         #TODO: Load the map here...
+        self.map = maps.load_level_file(1)
         self.generate_walls(self.screen_size)
         self.generate_ants(500)
         self.generate_queens(10)
