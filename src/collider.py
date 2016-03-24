@@ -46,15 +46,15 @@ class Collider():
 
     def find_ants_near_walls(self):
         group = [[] for _ in range(4)]  # Wall groups
-        for ant in self.objects:
-            if ant.rect.centery < self.segmenter.margin:
-                group[0].append(ant)  # top
-            elif ant.rect.centery > self.segmenter.height - self.segmenter.margin:
-                group[2].append(ant)  # bottom
-            if ant.rect.centerx > self.segmenter.width - self.segmenter.margin:
-                group[1].append(ant)  # right
-            elif ant.rect.centerx < self.segmenter.margin:
-                group[3].append(ant)
+        for obj in self.objects:
+            if obj.rect.centery < self.segmenter.margin:
+                group[0].append(obj)  # top
+            elif obj.rect.centery > self.segmenter.height - self.segmenter.margin:
+                group[2].append(obj)  # bottom
+            if obj.rect.centerx > self.segmenter.width - self.segmenter.margin:
+                group[1].append(obj)  # right
+            elif obj.rect.centerx < self.segmenter.margin:
+                group[3].append(obj)
         return group
 
     def segregate_objects(self):
